@@ -11,14 +11,6 @@ app.use(express.static(__dirname + '/public'));
 var lastPrice,price,marketprice; 
 var nse = api.NSE;
 
-// nse.getQuoteInfo("INFY")
-// .then(async function (response) { 
-//    lastPrice = await response.data.data[0].lastPrice
-//    price = JSON.stringify(lastPrice).replaceAll('"', '').replaceAll(',', '')
-//    marketprice = parseFloat(price);
-//    console.log("marketprice:"+marketprice)
-//   });
-
 async function getprice(symbol){
       const response =  await nse.getQuoteInfo(symbol)
       lastPrice =  response.data.data[0].lastPrice
@@ -27,23 +19,24 @@ async function getprice(symbol){
   }
 
 app.get('/',function(req,res){
-      var sql1 = `select symbol,quantity,avg_price,market_price from stock_details where 1=1`
-      con.query(sql1, function (err, result, fields) {
-        if(err) throw err;
-          result.forEach(function(i){
-               getprice(i.symbol).then(()=>{
-                var sql2 = `update stock_details SET market_price = ${marketprice} WHERE symbol = "${i.symbol}"`
-                con.query(sql2,function(err,result,fields){
-                  if(err) throw err;
-              }) 
-           })
-          })  
-      })
-      var sql = `select symbol,quantity,avg_price,market_price from stock_details where 1=1`
-      con.query(sql,function(err,result,fields){
-        if(err) throw err;
-        res.render("home", { data: result })
-    })
+    //   var sql1 = `select symbol,quantity,avg_price,market_price from stock_details where 1=1`
+    //   con.query(sql1, function (err, result, fields) {
+    //     if(err) throw err;
+    //       result.forEach(function(i){
+    //            getprice(i.symbol).then(()=>{
+    //             var sql2 = `update stock_details SET market_price = ${marketprice} WHERE symbol = "${i.symbol}"`
+    //             con.query(sql2,function(err,result,fields){
+    //               if(err) throw err;
+    //           }) 
+    //        })
+    //       })  
+    //   })
+    //   var sql = `select symbol,quantity,avg_price,market_price from stock_details where 1=1`
+    //   con.query(sql,function(err,result,fields){
+    //     if(err) throw err;
+    //     res.render("home", { data: result })
+    // })
+    res.render("home")
 })
 
 app.post('/',function(req,res){
