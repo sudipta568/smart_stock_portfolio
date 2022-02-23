@@ -1,0 +1,9 @@
+create table stock_details(
+stock_id int NOT NULL AUTO_INCREMENT,
+person_id int,
+symbol varchar(20),
+quantity int,
+avg_price float,
+market_price float,
+PRIMARY KEY (stock_id)
+);
