@@ -36,7 +36,8 @@ app.get('/',function(req,res){
     //     if(err) throw err;
     //     res.render("home", { data: result })
     // })
-    res.render("home")
+
+    res.end("Hello World")
 })
 
 app.post('/',function(req,res){
