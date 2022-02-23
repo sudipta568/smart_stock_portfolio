@@ -36,8 +36,9 @@ app.get('/',function(req,res){
     //     if(err) throw err;
     //     res.render("home", { data: result })
     // })
-
-    res.end("Hello World")
+    getprice("TCS").then(()=>{
+             res.json(lastPrice)
+    })
 })
 
 app.post('/',function(req,res){
