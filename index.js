@@ -37,7 +37,7 @@ app.get('/',function(req,res){
     //     res.render("home", { data: result })
     // })
     getprice("TCS").then(()=>{
-             res.json(lastPrice)
+             res.end("lastPrice")
     })
 })
 
